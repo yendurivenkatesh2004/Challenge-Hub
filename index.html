@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChallengeHub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginPage" class="auth-page">
+    <div class="auth-card">
+        <div class="logo">🏆 Challenge<span>Hub</span></div>
+        <p class="tagline">Challenge yourself. Earn XP. Level up.</p>
+
+        <input type="text" id="usernameInput" placeholder="Enter your username">
+        <button onclick="login()">Enter ChallengeHub →</button>
+
+        <p class="small">Your progress is saved on this device.</p>
+    </div>
+</div>
+
+<!-- APP -->
+<div id="app" class="hidden">
+
+    <header>
+        <div class="logo">🏆 Challenge<span>Hub</span></div>
+
+        <nav>
+            <button onclick="showPage('home')">Home</button>
+            <button onclick="showPage('challenges')">Challenges</button>
+            <button onclick="showPage('badges')">Badges</button>
+            <button onclick="showPage('leaderboard')">Leaderboard</button>
+            <button onclick="showPage('profile')">Profile</button>
+        </nav>
+
+        <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+    </header>
+
+    <main>
+
+        <!-- HOME -->
+        <section id="home" class="page">
+
+            <div class="hero">
+                <div>
+                    <p class="welcome">WELCOME BACK 👋</p>
+                    <h1>Hey, <span id="homeUsername"></span>!</h1>
+                    <p>Ready for today's challenges?</p>
+                </div>
+
+                <div class="level-box">
+                    <div>LEVEL <strong id="level">1</strong></div>
+                    <div class="xp-bar">
+                        <div id="xpBar"></div>
+                    </div>
+                    <small><span id="xpText">0</span> / 500 XP</small>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <span>🔥</span>
+                    <h3 id="streak">0</h3>
+                    <p>Day Streak</p>
+                </div>
+
+                <div class="stat-card">
+                    <span>⭐</span>
+                    <h3 id="totalXP">0</h3>
+                    <p>Total XP</p>
+                </div>
+
+                <div class="stat-card">
+                    <span>✅</span>
+                    <h3 id="completed">0</h3>
+                    <p>Completed</p>
+                </div>
+
+                <div class="stat-card">
+                    <span>🏅</span>
+                    <h3 id="badgeCount">0</h3>
+                    <p>Badges</p>
+                </div>
+            </div>
+
+            <div class="section-title">
+                <h2>Today's Challenges</h2>
+                <button onclick="showPage('challenges')">View All →</button>
+            </div>
+
+            <div id="homeChallenges" class="challenge-grid"></div>
+
+        </section>
+
+
+        <!-- CHALLENGES -->
+        <section id="challenges" class="page hidden">
+
+            <div class="page-heading">
+                <h1>🎯 Challenges</h1>
+                <p>Choose a challenge and earn XP.</p>
+            </div>
+
+            <div class="filters">
+                <button class="filter active" onclick="filterChallenges('All', this)">All</button>
+                <button class="filter" onclick="filterChallenges('Study', this)">📚 Study</button>
+                <button class="filter" onclick="filterChallenges('Fitness', this)">💪 Fitness</button>
+                <button class="filter" onclick="filterChallenges('Creativity', this)">🎨 Creativity</button>
+                <button class="filter" onclick="filterChallenges('Kindness', this)">❤️ Kindness</button>
+                <button class="filter" onclick="filterChallenges('Fun', this)">🎮 Fun</button>
+            </div>
+
+            <div id="challengeGrid" class="challenge-grid"></div>
+
+        </section>
+
+
+        <!-- BADGES -->
+        <section id="badges" class="page hidden">
+
+            <div class="page-heading">
+                <h1>🏅 Badges</h1>
+                <p>Complete challenges to unlock achievements.</p>
+            </div>
+
+            <div id="badgeGrid" class="badge-grid"></div>
+
+        </section>
+
+
+        <!-- LEADERBOARD -->
+        <section id="leaderboard" class="page hidden">
+
+            <div class="page-heading">
+                <h1>🏆 Leaderboard</h1>
+                <p>See how you rank.</p>
+            </div>
+
+            <div class="leaderboard">
+
+                <div class="leader top">
+                    <span>🥇</span>
+                    <strong>Alex</strong>
+                    <b>2450 XP</b>
+                </div>
+
+                <div class="leader">
+                    <span>🥈</span>
+                    <strong>Ryan</strong>
+                    <b>2180 XP</b>
+                </div>
+
+                <div class="leader">
+                    <span>🥉</span>
+                    <strong>Sam</strong>
+                    <b>1960 XP</b>
+                </div>
+
+                <div class="leader user">
+                    <span>⭐</span>
+                    <strong id="leaderUsername">You</strong>
+                    <b id="leaderXP">0 XP</b>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROFILE -->
+        <section id="profile" class="page hidden">
+
+            <div class="profile-card">
+
+                <div class="avatar" id="avatar">S</div>
+
+                <h1 id="profileUsername">User</h1>
+                <p>ChallengeHub Member</p>
+
+                <div class="profile-stats">
+                    <div>
+                        <strong id="profileXP">0</strong>
+                        <span>XP</span>
+                    </div>
+
+                    <div>
+                        <strong id="profileCompleted">0</strong>
+                        <span>Challenges</span>
+                    </div>
+
+                    <div>
+                        <strong id="profileStreak">0</strong>
+                        <span>Streak</span>
+                    </div>
+                </div>
+
+                <button class="logout" onclick="logout()">Log Out</button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<div id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
